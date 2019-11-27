@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'automated-builds';
   publisherName = 'Jai Chaturvedi!!';
-  message = 'This automated deployment will trigger only from master branch.';
+  message = 'This automated deployment will trigger only from dev branch.';
 }
