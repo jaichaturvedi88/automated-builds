@@ -3,7 +3,7 @@ jobs:
     build:
         working_direcsry: ~/automated-builds
         docker:
-            - image: circleci/node:8.9.3-browsers
+            - image: circleci/node:latest
         steps:
             - checkout
             - run:
@@ -22,12 +22,6 @@ jobs:
                 key: v1-dependencies-{{ checksum "package.json" }}
                 paths:
                     - node_modules
-            - run:
-                name: Linting
-                command: npm run lint
-            - run:
-                name: Testing
-                command: npm run test-prod
             - run:
                 name: Building
                 command: npm run build-prod
