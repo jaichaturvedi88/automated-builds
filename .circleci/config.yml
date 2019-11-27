@@ -25,6 +25,9 @@ jobs:
             - run:
                 name: Building
                 command: npm run build
+            - run:
+                name: 'Deploy to Firebase Hosting'
+                command: './node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN'
             - save_cache:
                 key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
                 paths:
@@ -32,31 +35,31 @@ jobs:
                     - package.json
                     - firebase.json
                     - .firebaserc
-    deploy:
-        docker:
-            - image: circleci/node:chakracore-8.11-browsers-legacy
-        working_directory: ~/project
-        steps:
-            - run:
-                name: Show current branch
-                command: echo ${CIRCLE_BRANCH}
-            - restore_cache:
-                key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-            - run:
-                name: Install Firebase
-                command: npm install --save-dev firebase-tools
-            - run:
-                name: Deploy Master to Firebase
-                command: npm run firebase-deploy
+    # deploy:
+    #     docker:
+    #         - image: circleci/node:chakracore-8.11-browsers-legacy
+    #     working_directory: ~/project
+    #     steps:
+    #         - run:
+    #             name: Show current branch
+    #             command: echo ${CIRCLE_BRANCH}
+    #         - restore_cache:
+    #             key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+    #         - run:
+    #             name: Install Firebase
+    #             command: npm install --save-dev firebase-tools
+    #         - run:
+    #             name: Deploy Master to Firebase
+    #             command: npm run firebase-deploy
 
-workflows:
-    version: 2
-    -deploy:
-        jobs:
-        - build
-        - deploy:
-            requires:
-                - build
-            filters:
-                branches:
-                    only: master
+# workflows:
+#     version: 2
+#     -deploy:
+#         jobs:
+#         - build
+#         - deploy:
+#             requires:
+#                 - build
+#             filters:
+#                 branches:
+#                     only: master
