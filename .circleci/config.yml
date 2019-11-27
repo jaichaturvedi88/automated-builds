@@ -24,7 +24,7 @@ jobs:
                     - node_modules
             - run:
                 name: Building
-                command: npm run build-prod
+                command: npm run build
             - save_cache:
                 key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
                 paths:
