@@ -23,14 +23,11 @@ jobs:
           paths:
             - node_modules
       - run:
-            name: Linting
-            command: npm run lint
+          name: Linting
+          command: npm run lint
       - run:
           name: Building
           command: npm run build
-      - run:
-          name: "Deploy to Firebase Hosting"
-          command: "./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN"
       - save_cache:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:

@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'automated-builds';
   publisherName = 'Jai Chaturvedi!!';
-  message = 'deploying from test-branch';
+  message = 'testing deployment from test-branch';
 }
