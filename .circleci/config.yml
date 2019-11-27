@@ -1,7 +1,7 @@
 version: 2
 jobs:
     build:
-        working_direcsry: ~/project
+        working_direcsry: ~/automated-builds
         docker:
             - image: circleci/node:8.9.3-browsers
         steps:
@@ -66,4 +66,3 @@ workflows:
             filters:
                 branches:
                     only: master
-                    
